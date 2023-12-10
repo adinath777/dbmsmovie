@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/userplan.css">
+  
+</head>
+<style>
+  
+    .helo {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: black;
+      width: 100%;
+      margin-left: 50px;
+   
+      width: 1600px;
+    }
+    
+    li {
+      float: left;
+      
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 24px 38px;
+      text-decoration: none;
+      width: 100%;
+    }
+    
+    li a:hover {
+      background-color:white;
+      color: black;
+    }
+    .main{
+        width: 100%;
+        margin-top: -40px;
+    }
+    </style>
+
+
+<body>
+    <div class="main">
+    <ul class="helo">
+      
+
+        <li><a  class="#" href="#home">Home</a></li>
+      
+       
+       
+      </ul>
+    </div>
+      
+
+   <div style="width: 100%;margin-top: 40px; background-color: none; margin-left: -170px;">
+    <h1>Subscription Plans</h1>
+<form action="/userplan" method="post">
+
+    
+<ul class="product-plans">
+    
+    {% for row in sqldata %}
+    <div class="row">
+        <div class="col-md-4">
+        <li class="product-plan">
+        <div class="title">{{row.1}}</div>
+        <div class="price">₹ {{row.2}}</div>
+        <ul class="features">
+            <li class="check">{{row.3}}</li>
+            <!-- <li class="cross">Other Text Title</li>
+            <li class="cross" >Text Space Goes Here</li>
+            <li class="cross">Description Space</li>
+            <li class="cross">Sample Text Here</li>  -->
+        </ul>
+        <button class="btn"><a href="/viewplan/{{row.0}}">Select</a></button>
+        
+    </li>
+        </div>
+        </div>
+    {% endfor%}
+</ul>
+
+
+
+</form>
+</div>
+
+</body>
+</html>

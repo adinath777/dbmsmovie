@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Admin Dashboard Using HTML CSS & JavaScript</title>
+    <!-- MATERIAL CDN -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+    />
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="/static/style.css" /> 
+  </head>
+  <body>
+    <!-- =================== START OF CONTAINER =================== -->
+    <div class="container">
+      <!-- =================== START OF ASIDE =================== -->
+      <aside>
+        <!-- =================== START OF TOP =================== -->
+        <div class="top">
+          <!-- =================== START OF LOGO =================== -->
+          <div class="logo">
+           
+            <h2>MOVIE<span class="danger">MANIA</span></h2>
+          </div>
+          <!-- =================== END OF LOGO =================== -->
+
+          <!-- =================== START OF CLOSE ICON =================== -->
+          <div class="close" id="close-btn">
+            <span class="material-icons-sharp">close</span>
+          </div>
+          <!-- =================== END OF CLOSE ICON =================== -->
+        </div>
+        <!-- =================== END OF TOP =================== -->
+
+        <!-- =================== START OF SIDEBAR =================== -->
+        <div class="sidebar">
+          <a href="#" class="active">
+            <span class="material-icons-sharp">dashboard</span>
+            <h3>Home</h3>
+          </a>
+          <a href="plan" >
+            <span class="material-icons-sharp">perm_identity</span>
+            <h3>PLANS</h3>
+          </a>
+         
+          <a href="category">
+            <span class="material-icons-sharp">notes</span>
+            <h3>CATEGORY</h3>
+          </a>
+          <a href="movie">
+            <span class="material-icons-sharp">movie</span>
+            <h3>MOVIE</h3>
+          </a>
+     
+
+          <a href="{{ url_for('logout') }}" style="text-decoration: none;">
+            <span class="material-icons-sharp"> logout</span>
+            <h3>log-out</h3>
+           
+          </a>
+         
+        </div>
+        <!-- =================== END OF SIDEBAR =================== -->
+      </aside>
+      <!-- =================== END OF ASIDE =================== -->
+
+      <!-- =================== START OF MAIN =================== -->
+      <main>
+        
+        <H1  style="color: transparent;">sckjKC</H1>
+        <H1  style="color: transparent;">sckjKC</H1>
+     
+        
+        <h1 >Dashboard</h1>
+        
+       
+
+
+
+        
+
+    
+        <!-- =================== START OF INSIGHTS =================== -->
+        <div class="insights">
+           <!-- =================== START OF INCOME =================== -->
+           <div class="income" >
+            <span class="material-icons-sharp">notes</span>
+            <div class="middle">
+              <div class="left">
+              <h1>Plans</h1>
+              </div>
+              <div class="progress">
+            
+                <div class="number">
+            
+                </div>
+              </div>
+            </div> 
+            <button  class="green"  ><a href="plan"> Click Here </a></button>
+        
+          </div>
+          <!-- =================== END OF INCOME =================== -->
+          <div class="" >
+            <span class="material-icons-sharp">notes</span>
+            <div class="middle">
+              <div class="left">
+              <h1>Movie-Category</h1>
+              </div>
+              <div class="progress">
+            
+                <div class="number">
+            
+                </div>
+              </div>
+            </div> 
+            <button  class="green"  ><a href="category"> Click Here </a></button>
+        
+          </div>
+ 
+          <div class="expenses">
+            <span class="material-icons-sharp">notes</span>
+            <div class="middle">
+              <div class="left">             
+                <h1>Movie-Language</h1>
+              </div>
+              <div class="progress">
+              
+                <div class="number">
+                  
+                </div>
+              </div>
+            </div>
+        
+            <button class="green"  > <a href="language">Click Here </a> </button>
+          </div>
+
+
+
+          <!-- =================== START OF EXPENSES =================== -->
+          <div class="expenses">
+            <span class="material-icons-sharp">movie</span>
+            <div class="middle">
+              <div class="left">             
+                <h1>Movie</h1>
+              </div>
+              <div class="progress">
+              
+                <div class="number">
+                  
+                </div>
+              </div>
+            </div>
+        
+            <button class="green"  > <a href="movie">Click Here </a> </button>
+          </div>
+          <!-- =================== END OF EXPENSES =================== -->
+               <!-- =================== START OF SALES =================== -->
+               <div class="sales">
+                <span class="material-icons-sharp">person
+    
+                </span>
+                <div class="middle">
+                  <div class="left">
+                    <h1>Customer</h1>
+                   </div>
+                  <div class="progress">
+                
+                    <div class="number">
+                
+                    </div>
+                  </div>
+                </div>   
+                <button class="green"  > <a href="/customer"> Click Here </a></button>
+              </div>
+              <!-- =================== END OF SALES =================== -->
+               <!-- =================== END OF EXPENSES =================== -->
+               <!-- =================== START OF SALES =================== -->
+               <div class="sales">
+                <span class="material-icons-sharp">person
+    
+                </span>
+                <div class="middle">
+                  <div class="left">
+                    <h1>subscription details</h1>
+                   </div>
+                  <div class="progress">
+                
+                    <div class="number">
+                
+                    </div>
+                  </div>
+                </div>   
+                <button class="green"  > <a href="/buydet"> Click Here </a></button>
+              </div>
+
+         
+
+        </div>
+        <!-- =================== START OF INSIGHTS =================== -->
+
+        </div>
+        <!-- =================== END OF RECENT ORDER =================== -->
+      </main>
+      <!-- =================== END OF MAIN =================== -->
+
+      <!-- =================== START OF RIGHT =================== -->
+      <div class="right">
+        <!-- =================== START OF TOP =================== -->
+        <div class="top">
+          <button id="menu-btn">
+            <span class="material-icons-sharp">menu</span>
+          </button>
+          <div class="theme-toggler">
+            <span class="active material-icons-sharp">light_mode</span>
+            <span class="material-icons-sharp">dark_mode</span>
+          </div>
+          <div class="profile">
+            <div class="info">
+              <p>Hey, <b>Daniel</b></p>
+              <small class="text-muted">Admin</small>
+            </div>
+            <div class="profile-photo">
+              <img src="/static/img/kisspng-computer-icons-vector-graphics-person-portable-net-myada-baaranmy-teknik-servis-hizmetleri-5c48d5c2849149.051236271548277186543.jpg" />
+            </div>
+          </div>
+        </div>
+        <!-- =================== END OF TOP =================== -->
+
+
+         
+      </div>
+      <!-- =================== END OF RIGHT =================== -->
+    </div>
+    <!-- =================== END OF CONTAINER =================== -->
+    <script src="js/orders.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      const menuBtn = document.querySelector("#menu-btn");
+const sideMenu = document.querySelector("aside");
+const closeBtn = document.querySelector("#close-btn");
+const themeToggler = document.querySelector(".theme-toggler");
+const logoImg = document.querySelector(".logo img");
+
+// OPEN SIDEBAR
+menuBtn.addEventListener("click", () => {
+  sideMenu.classList.add("active");
+});
+
+// CLOSE SIDEBAR
+closeBtn.addEventListener("click", () => {
+  sideMenu.classList.remove("active");
+});
+
+// CHANGE THEME
+themeToggler.addEventListener("click", () => {
+  document.body.classList.toggle("dark-theme-variables");
+
+  if (localStorage.getItem("darkMode")) {
+    localStorage.removeItem("darkMode");
+  } else {
+    localStorage.setItem("darkMode", document.body.className);
+  }
+
+  themeToggler.querySelector("span:first-child").classList.toggle("active");
+  themeToggler.querySelector("span:last-child").classList.toggle("active");
+});
+
+
+
+// CHECK ON LOCAL STORAGE IS EMPTY OR NOT EMPTY
+if (localStorage.getItem("darkMode")) {
+  document.body.className = localStorage.getItem("darkMode");
+  themeToggler.querySelector("span:first-child").classList.remove("active");
+  themeToggler.querySelector("span:last-child").classList.add("active");
+}
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/userplan.css">
+</head>
+<style>
+  
+    .helo {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: black;
+      width: 100%;
+      margin-left: 50px;
+   
+      width: 1600px;
+    }
+    
+    li {
+      float: left;
+      
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 24px 38px;
+      text-decoration: none;
+      width: 100%;
+    }
+    
+    li a:hover {
+      background-color:white;
+      color: black;
+    }
+    .main{
+        width: 100%;
+        margin-top: -60px;
+    }
+    </style>
+
+<body>
+    <div class="main">
+        <ul class="helo">
+            <li ><a  class="#" href="home1">Home</a></li>
+          
+            
+           
+          </ul>
+        </div>
+        <div style="width: 100%;margin-top: 30px; background-color: none; margin-left: -170px;">
+          
+    <h1>Subscription Plans</h1>
+    <br><br>
+<form action="/buy" method="post">
+
+    
+<ul class="product-plans">
+   
+    
+    {% for row in sqldata %}
+  
+        <div class="col-md-3">
+        <li class="product-plan">
+        <div class="title">{{row.1}}</div>
+        <input type="hidden" name="r1" value="{{row.1}}">
+        <div class="price">₹ {{row.2}}</div>
+        <input type="hidden" name="r2" value="{{row.2}}">
+        <ul class="features">
+            <li class="check">{{row.1}}</li>
+            <input type="hidden" name="r3" value="{{row.3}}">
+            <li class="check">{{row.3}}</li>
+            <li class="check" >24 hour support</li>
+            <li class="cross">Unlimited Acess </li>
+            
+        </ul>
+        <button class="btn">buy</button>
+        
+    </li>
+        </div>
+        &nbsp &nbsp &nbsp &nbsp
+    {% endfor%}
+</ul>
+<div class="user">
+    {% for i in userdata %}
+    <input type="hidden" value="{{i.2}}" name="email">
+    {% endfor %}
+</div>
+</form>
+</div>
+
+
+</body>
+</html>

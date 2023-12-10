@@ -1,0 +1,372 @@
+
+
+<link href="{{url_for('static', filename = '/css/bootstrap.min.css')}}" rel="stylesheet">
+
+<style>
+
+   h1{
+      float: left;
+   }
+
+   ul {
+      margin-top: 3px;
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     background-color:black;
+     flex-direction: column;
+     height: 70px;
+     text-decoration: none;
+     list-style: none;
+
+   }
+   
+   li {
+     float: right;
+    
+   }
+   
+   li a {
+     display: block;
+     color: white;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+     margin-top: 15px;
+     
+    
+   }
+   
+   li a:hover {
+     background-color: #111;
+   }
+   </style>
+{% block body %}
+
+
+
+<!-- NAVBAAAAAR ENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
+<ul>
+   <h1 style="color: white;" >NEOFLIX</h1>
+   <li><a class="active" href="{{ url_for('logout') }}">Logout</a></li>
+
+   <li><a class="active" href="index">HOME</a></li>
+
+ </ul>
+
+
+
+
+<div class="container">
+
+    <div class="row" style="margin-top: 200px;" >
+
+        <div class="col md-12">
+
+
+
+            <h2>Customer-Plan List <button type="button" class="btn btn-success btn-large " style="margin-left: 200px; margin-top: -250px; height: 80px;width: 250px; font-size: 2rem;" data-toggle="modal" data-target="#myModal">Add New Plans</button></h2>
+
+
+
+
+    {%with messages = get_flashed_messages()%}
+
+    {%if messages%}
+
+    {% for message in messages %}
+
+    <div class="alert alert-success alert-dismissable" role="alert">
+
+     <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+
+         <span aria-hidden="true">&times;</span>
+
+     </button>
+        {{message}}
+
+
+    </div>
+
+
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+
+
+
+
+            <table class="table table-striped">
+
+
+                <tr>
+              <th>No</th>
+              <th>Plan-Name</th>
+              <th>Plan-Amount</th>
+              <th>Plan-Duration</th>
+              <th>Status</th>
+              <th>Action</th>
+
+
+          </tr>
+
+
+
+
+
+                {% for row in sqldata %}
+                <tr>
+                    <td>{{row.0}}</td>
+                    <td>{{row.1}}</td>
+                    <td>{{row.2}}</td>
+                    <td>{{row.3}}</td>
+                    <td>{{row.4}}</td>
+                    <td>
+
+
+               <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                <a href="/delete/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+
+                    </td>
+
+                </tr>
+
+                <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+
+
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{ url_for('update') }}" method="POST">
+
+
+               <div class="form-group">
+
+
+                  <label>Plan-Name:</label>
+                   <input type="hidden"  name="id" value="{{row.0}}">
+
+                  <input type="text" class="form-control" name="planname" value="{{row.1}}">
+
+
+               </div>
+
+
+
+               <div class="form-group">
+
+
+                  <label>Plan-Amount:</label>
+
+                  <input type="number" class="form-control" name="planamount" value="{{row.2}}">
+
+
+               </div>
+
+
+               <div class="form-group">
+
+
+                  <label>Plan-Duration:</label>
+
+                  <input type="text" class="form-control" name="planduration" value="{{row.3}}">
+
+
+               </div>
+               <div class="form-group">
+
+
+                  <label>Status</label>
+
+                  <!-- <select name="status"  >
+                     <option value="ACTIVE" selected="{{row.4}}">ACTIVE</option>
+                     <option value="INACTIVE">INACTIVE</option> 
+                  </select> -->
+                  <select name="status"  >
+                     <!-- <option value="ACTIVE" selected="{{row.4}}">ACTIVE</option>
+                     <option value="INACTIVE">INACTIVE</option>  -->
+                     {% if row[2] == 'ACTIVE' %}
+                     <option value="ACTIVE" selected>ACTIVE</option>
+                     <option value="INACTIVE" >INACTIVE</option>
+                     {% else %}
+                     <option value="ACTIVE">ACTIVE</option>
+                     <option value="INACTIVE" selected>INACTIVE</option>
+                     {% endif %}
+                  </select>
+
+               </div>
+
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="sbumit">Update</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+                {% endfor  %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+<!-- Modal -->
+
+
+<div id="myModal" class="modal fade" role="dialog">
+
+
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+            <h4 class="modal-title">Please Insert Data</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{ url_for('insert') }}" method="POST">
+
+
+               <div class="form-group">
+
+
+                  <label>Plan-Name:</label>
+                  <input type="text" class="form-control" name="planname" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Plan-Amount:</label>
+                  <input type="number" class="form-control" name="planamount" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Plan-Duration</label>
+                  <input type="text" class="form-control" name="planduration" required="1">
+
+
+               </div>
+
+
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Insert Data</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+
+
+ 
+    </div>
+
+
+</div>
+
+
+<!-- {% endblock %} -->
+
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>

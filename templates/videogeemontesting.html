@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      
+      rel="stylesheet"
+    />
+    <title>Slide Animation</title>
+  </head>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.landing {
+  min-height: 100vh;
+  background: url("./hero.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 0rem 5rem;
+  background-color:black;
+  background-position: center top;
+}
+
+.intro {
+  background: rgb(0, 0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 2s;
+}
+.slider {
+  background: rgb(0, 0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+  opacity:0%;
+  
+}
+
+video#myvideo {
+  position: fixed; right: 0; bottom: 0;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto; z-index: -100;
+  background-size: cover;
+  pointer-events: none;
+  }
+
+.skip {
+
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  background-color: aliceblue;
+  z-index:-99;
+  position: absolute;
+  top: 750px;
+  opacity: 10%;
+
+}  
+
+.skip:hover {
+
+  opacity:50%;
+}
+  </style>
+  <body style="background-color:rgb(0, 0, 0);">
+    
+    <main>
+      <section class="landing">
+      </section>
+    </main>
+
+    <div class="intro" id="intro1">
+
+      <button class="skip" type="button" onclick="fadeOut()">Skip Intro</button>
+
+        <video width="320" height="240" autoplay="autoplay" controls="0" muted id="myvideo">
+          <source src="video.mp4" type="video/mp4">
+          
+        </video>    
+
+      
+
+    </div>
+
+   
+    <div class="slider"></div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
+      integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./app.js"></script>
+    <script>
+        const tl = gsap.timeline({ defaults: { ease: "power1.out" } });
+
+tl.to(".slider", { y: "-100%", duration: 1.5, delay: 18 });
+tl.to(".intro", { y: "-100%", duration: 1 }, "-=1.5");
+
+function fadeOut(){
+    const intro = document.getElementById('intro1');
+    intro.style.opacity='0';
+}
+
+function hideDiv (){
+
+    const intro = document.getElementById('intro1').style.visibility="hidden";
+}
+    setTimeout("hideDiv()",18000);
+
+
+
+    </script>
+  </body>
+</html>

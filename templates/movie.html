@@ -1,0 +1,459 @@
+
+
+<link href="{{url_for('static', filename = '/css/bootstrap.min.css')}}" rel="stylesheet">
+<style>
+
+   h1{
+      float: left;
+   }
+
+   ul {
+      margin-top: 3px;
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     background-color:black;
+     flex-direction: column;
+     height: 70px;
+     text-decoration: none;
+     list-style: none;
+
+   }
+   
+   li {
+     float: right;
+    
+   }
+   
+   li a {
+     display: block;
+     color: white;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+     margin-top: 15px;
+    
+   }
+   
+   li a:hover {
+     background-color: #111;
+   }
+   </style>
+{% block body %}
+
+
+<!-- NAVBAAARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
+
+<ul>
+   <h1 style="color: white;" >NEOFLIX</h1>
+   <li><a class="active" href="{{ url_for('logout') }}">Logout</a></li>
+   <li><a class="active" href="index">HOME</a></li>
+   
+
+ </ul>
+
+<!-- NAVBAAAAAR ENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col md-12" style="margin-top: 200px;">
+
+
+
+         <h2>Movie-Upload List <button type="button" class="btn btn-danger btn-large " style="margin-left: 200px; margin-top: -250px; height: 80px;width: 250px; font-size: 2rem;" data-toggle="modal" data-target="#myModal">Add New Movies</button></h2>
+
+
+
+    {%with messages = get_flashed_messages()%}
+
+    {%if messages%}
+
+    {% for message in messages %}
+
+    <div class="alert alert-success alert-dismissable" role="alert">
+
+     <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+
+         <span aria-hidden="true">&times;</span>
+
+     </button>
+        {{message}}
+
+
+    </div>
+
+
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+
+
+
+
+            <table class="table table-striped">
+
+
+                <tr>
+              <th>No</th>
+              <th>Movie-Name</th>
+              <th>Movie-Category</th>
+              <th>Movie-Language</th>
+              <th>Movie-Upload</th>
+              <th>Movie-Thumbnail</th>
+              <th>Status</th>
+              <th>Action</th>
+
+
+          </tr>
+
+
+
+
+
+                {% for row in sqldata %}
+                <tr>
+                    <td>{{row.0}}</td>
+                    <td>{{row.1}}</td>
+                    <td>{{row.8}}</td>
+                    <td>{{row.11}}</td>
+                    
+                    <td><video controls playsinline autoplay muted loop width=300 height=200>
+                     <source src="/static/upload/{{row.4}}" type="video/mp4">
+                   </video></td>
+
+                   <td>
+                     <img src="/static/upload/{{row.5}}" width=150 height=150 >
+                  </td>
+                  
+                   
+
+                     <td>{{row.6}}</td>    
+                    <td>             
+                    <a href="/updatee/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                    <a href="/deletee/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+
+                    </td>
+               <!-- <td><video  alt="{{row.4}}" width="50" height="50" controls >
+                  <source src="static/Uploads/{{row.4}}" type="video/mp4">
+                  </video>
+               </td> -->
+                </tr>
+
+                <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+
+
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{ url_for('updatee') }}" method="POST" enctype = "multipart/form-data">               >
+
+
+               <div class="form-group">
+
+
+                  <label>Movie-Name:</label>
+                   <input type="hidden"  name="id" value="{{row.0}}">
+
+                  <input type="text" class="form-control" name="moviename" value="{{row.1}}">
+
+
+               </div>
+
+
+
+               <div class="form-group">
+
+
+                  <label>Movie-Category:</label>
+
+                  <!-- <input type="text" class="form-control" name="category" value="{{row.2}}"> -->
+                  <SELECT name="category"class="form-control">
+                     {% for rowc in cdata %}
+                     {% if row[8] == rowc[1] %}
+                         <OPTION  value="{{rowc.0}}" selected style="color: black;">{{rowc.1}}</option>
+                     {% else %}
+                        <OPTION  value="{{rowc.0}}" style="color: black;">{{rowc.1}}</option>
+                     {% endif %}
+                     {% endfor %}
+                     </SELECT>
+
+               </div>
+
+
+               <div class="form-group">
+
+
+                  <label>Movie-Language:</label>
+
+                  <!-- <input type="text" class="form-control" name="language" value="{{row.3}}"> -->
+                 
+                  <SELECT name="language"class="form-control">
+                     
+                     {% for rowl in ldata %}
+                     {% if row[11] == rowl[1] %}
+                         <OPTION  value="{{rowl.0}}" selected style="color: black;">{{rowl.1}}</option>
+                     {% else %}
+                        <OPTION  value="{{rowl.0}}" style="color: black;">{{rowl.1}}</option>
+                     {% endif %}
+                     {% endfor %}
+                     </SELECT>
+
+
+               </div>
+
+
+               
+               <div class="form-group">
+
+
+                  <label>Movie-Upload:</label>
+                  <video  alt="{{row.4}}" width="50" height="50" controls >
+                     <source src="/static/upload/{{row.4}}" type="video/mp4">
+                  </video>
+                  <input type="hidden" name="video_original" value="{{row.4}}">
+
+                  <input type="file" class="form-control" name="uploaded-file" >
+                  
+
+               </div>
+
+               
+               <div class="form-group">
+
+
+                  <label>Movie-Thumbnail:</label>
+                  <video  alt="{{row.5}}" width="50" height="50" controls >
+                     <img src="/static/upload/{{row.5}}" width=150 height=150 >
+                  </video>
+                  <input type="hidden" name="img_original1" value="{{row.5}}">
+                  <input type="file" class="form-control" name="uploaded-file1" >
+                  
+
+               </div>
+             
+
+               <div class="form-group">
+
+
+                  <label>Status</label>
+
+                  <select name="status"  >
+                     {% if row[6] == 'ACTIVE' %}
+                     <option value="ACTIVE" selected>ACTIVE</option>
+                     <option value="INACTIVE" >INACTIVE</option>
+                     {% else %}
+                     <option value="ACTIVE">ACTIVE</option>
+                     <option value="INACTIVE" selected>INACTIVE</option>
+                     {% endif %}
+                  </select>
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="sbumit">Update</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+                {% endfor  %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+<!-- Modal -->
+
+
+<div id="myModal" class="modal fade" role="dialog">
+
+
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+            <h4 class="modal-title">Please Insert Data</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <!-- <form action="{{ url_for('insertt') }}" method="POST"> -->
+            <form action="{{ url_for('insertt') }}" method="post" enctype = "multipart/form-data">
+
+
+               <div class="form-group">
+
+
+                  <label>Movie-Name:</label>
+                  <input type="text" class="form-control" name="moviename" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+               
+                  <label>Movie-Category:</label>
+                  <!-- <input type="text" class="form-control" name="category" required="1"> -->
+                  <SELECT name="category"class="form-control">
+                     {% for row in cdata %}
+                         <OPTION  value="{{row.0}}" style="color: black;">{{row.1}}</option>
+                     {% endfor %}
+                     </SELECT>
+              
+                            
+                            
+        
+                     </select>
+               
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Movie-Language:</label>
+                  <!-- <input type="text" class="form-control" name="language" required="1"> -->
+                  <SELECT name="language"class="form-control">
+                  {% for row in ldata %}
+                  <OPTION  value="{{row.0}}" style="color: black;">{{row.1}}</option>
+            
+                   {% endfor %}
+                     </SELECT>
+
+               </div>
+
+                <div class="form-group">
+
+
+                  <label>Movie-Upload:</label>
+                  <input type="file" id="myFile" name="uploaded-file" accept=".mp4">
+
+
+               </div> 
+               <div class="form-group">
+
+
+                  <label>Movie-Thumbnail:</label>
+                  <input type="file" id="myFile" name="uploaded-file1" accept=".jpeg,.png">
+
+
+               </div> 
+
+
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Insert Data</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+
+
+ 
+    </div>
+
+
+</div>
+
+
+<!-- {% endblock %} -->
+
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+ 
